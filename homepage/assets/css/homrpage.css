@@ -1,0 +1,428 @@
+/* 全体のリセットと基本設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fafeff !important;
+    color: #c22b58;
+    line-height: 1.6;
+  }
+  
+  /* ヘッダーと検索バー */
+  .header {
+    background-color: #333;
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .search-bar {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  
+  .search-bar input[type="text"] {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .search-bar select.dropdown {
+    margin-left: 10px;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .search-bar button#searchButton {
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-bar button#searchButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* コンテナ・レイアウト */
+  .menu-container {
+    display: flex;
+    max-width: 1200px;
+    background-color: #ffffff;
+  }
+
+  .data-container {
+    background-color: #0056b3;
+  }
+  
+  /* メニューエリア */
+  .menu {
+    width: 250px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+  .menu-item {
+    margin-bottom: 10px;
+  }
+  
+  .menu-header {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .menu-header:hover {
+    background-color: #e9e9e9;
+  }
+  
+  /* データ表示エリア */
+  #data-container {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  /* テーブルスタイル */
+  #content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  #content table th,
+  #content table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  #content table th {
+    background-color: #f4f4f4;
+  }
+  
+  #content table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #content table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* ページネーションエリア */
+  #pagination-controls {
+    text-align: center;
+  }
+  
+  #pagination-controls .page-button {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #pagination-controls .page-button:hover {
+    background-color: #f4f4f4;
+  }
+  
+  #pagination-controls .page-button.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  #pagination-controls .page-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  #pagination-controls .ellipsis {
+    margin: 0 5px;
+    padding: 8px 12px;
+    color: #555;
+  }
+  
+  .highlight {
+    background-color: yellow;
+    font-weight: bold;
+    padding: 2px;
+    border-radius: 3px;
+  }
+
+  
+ /* ナビゲーションバーのカスタムデザイン */
+#mainNav {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  background-color: white; /* 背景を削除 */
+  box-shadow: none;
+  padding-top: 10px; /* 上部の余白 */
+  padding-bottom: 10px; /* 下部の余白 */
+  margin-bottom: 0; /* ナビバーとコンテンツの間の段差を削除 */
+  width: 100%; /* 幅を100%に */
+}
+
+/* ナビゲーションメニューアイテム */
+.navbar-nav .nav-item .nav-link {
+  margin-left: 30px;
+  color: black !important;
+  font-size: 1rem; /* 少し小さめのフォントサイズ */
+  padding: 6px 12px; /* パディングを少し小さく */
+  transition: background-color 0.3s ease, color 0.3s ease; /* 背景色と文字色のスムーズな変化 */
+}
+
+/* リンクホバー時のスタイル */
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* ホバー時の背景色（薄いグレー） */
+  color: #000; /* ホバー時の文字色（黒） */
+  border-radius: 5px; /* ホバー時に角を丸める */
+}
+
+
+
+/* トグルボタンのスタイル */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-color: #333; /* トグルアイコンの色（ダークグレー） */
+}
+
+/* アクティブなリンクのスタイル */
+.navbar-nav .nav-item.active .nav-link {
+  background-color: rgba(0, 0, 0, 0.2); /* アクティブなリンクの背景色（薄いグレー） */
+  color: #000; /* アクティブなリンクの文字色（黒） */
+  border-radius: 5px;
+}
+
+.footer {
+  background-color: #f8f9fa; /* 背景色（お好みで変更） */
+  padding: 20px 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer h3 {
+  font-weight: bold;
+}
+
+.footer .address {
+  white-space: normal; /* 住所を通常の折り返しにする */
+}
+
+.footer p {
+  margin-bottom: 2px; /* TELとFAXの間隔を狭くする */
+}
+
+.footer .copyright {
+  width: 100%;
+  border-top: 1px solid #ddd; /* 上部に区切り線 */
+  padding-top: 10px;
+  margin-top: 20px;
+  text-align: left !important;
+}
+
+
+@media (max-width: 768px) {
+  .copyright {
+      justify-content: center;
+      margin-top: 10px;
+  }
+}
+
+.zen-kaku-gothic-new-medium {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+@media (max-width: 768px) {
+  /* コンテナ全体：縦並びに */
+  .menu-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  /* メニュー：横幅縮小 or 上部に表示されるように */
+  .menu {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  /* データ表示部分 */
+  #data-container {
+    padding: 10px;
+  }
+
+  /* 検索バー：縦並びに */
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar input[type="text"],
+  .search-bar select.dropdown,
+  .search-bar button#searchButton {
+    margin-left: 0;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  /* テーブルが小さな画面で崩れないように */
+  #content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* フッター調整 */
+  .footer-container {
+    padding: 10px;
+  }
+
+  .footer h3 {
+    font-size: 1rem;
+  }
+
+  .footer p {
+    font-size: 0.9rem;
+  }
+
+  /* 検索ボタンやナビバーのフォントを縮小 */
+  .search-bar button#searchButton,
+  .navbar-nav .nav-item .nav-link {    
+    font-size: 0.95rem;
+  }
+}
+
+
+.zen-kaku-gothic-new-light {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-regular {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-medium {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-bold {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-black {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.toggler-icon {
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.toggler-icon span {
+  height: 3px;
+  width: 100%;
+  background-color: #000;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+#navToggle.is-active .toggler-icon span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#navToggle.is-active .toggler-icon span:nth-child(2) {
+  opacity: 0;
+}
+#navToggle.is-active .toggler-icon span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.toggler-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 24px;
+  width: 30px;
+}
+
+/* ハンバーガーアイコンの見た目設定 */
+.toggler-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 24px;
+  width: 30px;
+}
+
+.toggler-icon span {
+  height: 3px;
+  background-color: #333;
+  margin: 3px 0;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    background-color: #fff;
+    padding: 0 0 5px 0;
+    text-align: left;
+  }
+
+  .navbar-nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding-left: 15px;
+  }
+
+  .navbar-nav > .nav-item {
+    margin: 2px 0 !important;
+  }
+
+  .navbar-nav > .nav-item > .nav-link {
+    font-size: 15px !important;
+    padding: 4px 0 !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+}
+

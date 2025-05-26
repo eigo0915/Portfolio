@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>じゃんけんゲーム</title>
+        <link rel="stylesheet" href="Janken.css">
+    </head>
+    <body>
+        <h1>じゃんけんゲーム</h1>
+        <!-- プレーヤー名 -->
+         <div id="player-setup">
+            <p>あなたの名前を入力してください:</p>
+            <input type="text" id="playerNameInput" placeholder="例: 太郎">
+            <br>
+            <button onClick="startGame()">ゲーム開始</button>
+         </div>
+
+        <!-- ゲームエリア -->
+         <div id="game">
+            <h2 id="welcome"></h2>
+            <p>手を選んでください:</p>
+            <img src="https://img.icons8.com/ios/100/rock.png" class="hand-img" onClick="play('グー')" alt="グー">
+            <img src="https://img.icons8.com/ios/100/hand-scissors.png" class="hand-img" onClick="play('チョキ')" alt="チョキ">
+            <img src="https://img.icons8.com/ios/100/hand.png" class="hand-img" onClick="play('パー')" alt="パー">
+
+            <div id="result"></div>
+            <div id="cpu-hand">
+                <p>CPUの手 :</p>
+                <img id="cpu-hand-img" class="hand-img" src="" alt="CPUの手">
+            </div>
+            <div id="history"></div>
+         </div>
+
+        <script>
+            let playerName = '';
+            let winCount = 0;
+            let loseCount = 0;
+            let drawCount = 0;
+
+            function startGame() {
+                const input = document.getElementById('playerNameInput');
+                playerName = input.value.trim();
+
+                if (playerName === '') {
+                    alert('名前を入力してください！');
+                    return;
+                }
+                document.getElementById('welcome').textContent = `${playerName}さん、ようこそ！`;
+                document.getElementById('player-setup').style.display = 'none';
+                document.getElementById('game').style.display = 'block';
+            }
+
+            function play(player) {
+                const hands = ['グー', 'チョキ', 'パー'];
+                const images = {
+                    'グー': 'https://img.icons8.com/ios/100/rock.png',
+                    'チョキ': 'https://img.icons8.com/ios/100/hand-scissors.png',
+                    'パー': 'https://img.icons8.com/ios/100/hand.png'
+                };
+
+                const cpu = hands[Math.floor(Math.random() * hands.length)];
+
+                let resultText = '';
+
+                if (player === cpu) {
+                    resultText = 'あいこです！';
+                    drawCount++;
+                } else if (
+                    (player === 'グー' && cpu === 'チョキ') ||
+                    (player === 'チョキ' && cpu === 'パー') ||
+                    (player === 'パー' && cpu === 'グー')
+                ) {
+                    resultText = 'あなたの勝ち！';
+                    winCount++;
+                } else {
+                    resultText = 'あなたの負け...';
+                    loseCount++;
+                }
+
+                document.getElementById('result').innerHTML =
+                `あなた : ${player} / コンピュータ : ${cpu}<br><strong>${resultText}</strong>`;
+
+                document.getElementById('history').innerHTML =
+                `勝ち: ${winCount} 負け: ${loseCount} あいこ: ${drawCount}`;
+
+                document.getElementById('cpu-hand-img').src = images[cpu];
+                document.getElementById('cpu-hand-img').alt = cpu;
+            }
+        </script>
+
+    </body>
+</html>

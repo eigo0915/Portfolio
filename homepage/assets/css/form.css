@@ -1,0 +1,327 @@
+/* 全体のリセットと基本設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafeff !important;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* コンテナ */
+.contact-container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* タイトル */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* フォームのスタイル */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* 入力フィールドのフォーカス時 */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+/* 必須マーク */
+.required {
+    color: red;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* ボタンのデザイン */
+.confirm-button,
+.btn {
+    width: 100%;
+    background-color: transparent;
+    color: black;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.confirm-button:hover,
+.btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* モーダルのスタイル */
+.custom-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  z-index: 1050; /* モーダルを最前面に */
+}
+
+
+.modal-content {
+    text-align: center;
+}
+
+/* 確認用テーブル */
+.confirm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.confirm-table th,
+.confirm-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.button-group {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 送信・戻るボタン */
+.btn-submit,
+.btn-cancel {
+    padding: 8px 15px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover,
+.btn-cancel:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* 送信中のローディング */
+.loading {
+    text-align: center;
+    font-size: 16px;
+    color: black;
+    margin-top: 15px;
+}
+
+#mainNav {
+    background-color: white; /* 背景を削除 */
+    box-shadow: none;
+    padding-top: 10px; /* 上部の余白 */
+    padding-bottom: 10px; /* 下部の余白 */
+    margin-bottom: 0; /* ナビバーとコンテンツの間の段差を削除 */
+    width: 100%; /* 幅を100%に */
+  }
+  
+  /* ナビゲーションメニューアイテム */
+  .navbar-nav .nav-item .nav-link {
+    margin-left: 30px;
+    color: black !important;
+    font-size: 1rem; /* 少し小さめのフォントサイズ */
+    font-weight: normal; /* フォントの太さを半分に */
+    padding: 6px 12px; /* パディングを少し小さく */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 背景色と文字色のスムーズな変化 */
+  }
+  
+  /* リンクホバー時のスタイル */
+  .navbar-nav .nav-item .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* ホバー時の背景色（薄いグレー） */
+    color: #000; /* ホバー時の文字色（黒） */
+    border-radius: 5px; /* ホバー時に角を丸める */
+  }
+  
+  /* レスポンシブデザイン（スマホ・タブレット用） */
+  @media (max-width: 767px) {
+    #mainNav .navbar-nav {
+      text-align: center; /* スマホ画面ではリンクを中央揃え */
+    }
+  
+    #mainNav .navbar-nav .nav-link {
+      padding: 10px 15px;
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* トグルボタンのスタイル */
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #333; /* トグルアイコンの色（ダークグレー） */
+  }
+  
+  /* アクティブなリンクのスタイル */
+  .navbar-nav .nav-item.active .nav-link {
+    background-color: rgba(0, 0, 0, 0.2); /* アクティブなリンクの背景色（薄いグレー） */
+    color: #000; /* アクティブなリンクの文字色（黒） */
+    border-radius: 5px;
+  }
+  
+  .footer {
+    background-color: #f8f9fa; /* 背景色（お好みで変更） */
+    padding: 20px 0;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer h3 {
+    font-weight: bold;
+  }
+  
+  .footer .address {
+    white-space: normal; /* 住所を通常の折り返しにする */
+  }
+  
+  .footer p {
+    margin-bottom: 2px; /* TELとFAXの間隔を狭くする */
+  }
+  
+  .footer .copyright {
+    width: 100%;
+    border-top: 1px solid #ddd; /* 上部に区切り線 */
+    padding-top: 10px;
+    margin-top: 20px;
+    text-align: left !important;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .copyright {
+        justify-content: center;
+        margin-top: 10px;
+    }
+  }
+  
+  .zen-kaku-gothic-new-medium {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+  }
+
+  .zen-kaku-gothic-new-light {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .zen-kaku-gothic-new-regular {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .zen-kaku-gothic-new-medium {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .zen-kaku-gothic-new-bold {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .zen-kaku-gothic-new-black {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+/* ハンバーガーアイコンの見た目設定 */
+.toggler-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 24px;
+  width: 30px;
+}
+
+.toggler-icon span {
+  height: 3px;
+  background-color: #333;
+  margin: 3px 0;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    background-color: #fff;
+    padding: 0 0 5px 0;
+    text-align: left;
+  }
+
+  .navbar-nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding-left: 15px;
+  }
+
+  .navbar-nav > .nav-item {
+    margin: 2px 0 !important;
+  }
+
+  .navbar-nav > .nav-item > .nav-link {
+    font-size: 15px !important;
+    padding: 4px 0 !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+}
+
+

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directus連携アコーディオン（改善版）</title>
+  <link rel="stylesheet" href="./assets/css/homrpage.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light" id="mainNav">
+    <div class="container d-flex justify-content-between align-items-center zen-kaku-gothic-new-medium">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <span>PSテクノロジー株式会社</span>
+      </a>
+      <button class="navbar-toggler ms-auto" id="navToggle" type="button" data-bs-toggle="collapse" data-bs-target="#navcol-1" aria-controls="navcol-1" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="toggler-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navcol-1">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html#page-top">ページトップ</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#repair">修理サービス</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#support">製造現場改善支援</a></li>
+          <li class="nav-item"><a class="nav-link" href="homepage.html">修理実績</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">お問合せ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  
+  
+  <div class="header">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="製品名、メーカー名、シリアル番号で検索">
+      <select name="category" class="dropdown">
+        <option value="">すべて</option>
+        <option value="基盤">基盤</option>
+        <option value="電源ユニット">電源ユニット</option>
+        <option value="パワーサプライ">パワーサプライ</option>
+        <option value="スピードコントローラ">スピードコントローラ</option>
+        <option value="サーボドライバ">サーボドライバ</option>
+        <option value="サーボアンプ">サーボアンプ</option>
+        <option value="パルス発生器">パルス発生器</option>
+        <option value="制御基板">制御基板</option>
+        <option value="トラベルカウンタ">トラベルカウンタ</option>
+      </select>
+      <button id="searchButton">検索</button>
+    </div>
+  </div>
+
+  <div class="menu-container">
+    <div class="menu">
+      <div class="menu-item">
+        <div class="menu-header" data-product="">すべての製品</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="基盤">基盤</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="電源ユニット">電源ユニット</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="パワーサプライ">パワーサプライ</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="スピードコントローラ">スピードコントローラ</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="サーボドライバ">サーボドライバ</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="サーボアンプ">サーボアンプ</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="パルス発生器">パルス発生器</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="制御基板">制御基板</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-header" data-product="トラベルカウンタ">トラベルカウンタ</div>
+      </div>
+    </div>
+
+    <!-- データ表示用コンテナ -->
+    <div id="data-container">
+      <div id="content">ここに情報が表示されます。</div>
+      <!-- ページネーション専用のコンテナ -->
+      <div id="pagination-controls"></div>
+    </div>
+  </div>
+
+  <footer class="footer bg-light mt-5 py-4">
+    <div class="footer-container">
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <h3 class="fw-bold">PSテクノロジー株式会社</h3>
+          <p>〒678-0233 兵庫県赤穂市加里屋中洲2丁目30番地</p>
+          <p>TEL : 0791-43-8668</p>
+          <p>FAX : 0791-25-1264</p>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="row">
+            <div class="col-6">
+              <h5 class="fw-bold">コンテンツ</h5>
+                <ul class="list-unstyled">
+                  <li><a href="index.html">HOME</a></li>
+                  <li><a href="homepage.html">修理実績</a></li>
+                  <li><a href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+            <div class="col-lg-6 text-lg-end text-center copyright">
+                <p class="mb-0">Copyright © 2024 PSテクノロジー株式会社</p>
+            </div>
+        </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const navToggle = document.getElementById("navToggle");
+      const navbarNav = document.getElementById("navcol-1");
+
+      navToggle.addEventListener("click", () => {
+        navToggle.classList.toggle("is-active");
+      });
+    });
+    
+    document.addEventListener("DOMContentLoaded", async function () {
+  const menuHeaders = document.querySelectorAll(".menu-header");
+  const searchButton = document.getElementById("searchButton");
+  const searchInput = document.getElementById("searchInput");
+  const contentElement = document.getElementById("content");
+  const paginationElement = document.getElementById("pagination-controls");
+
+  let currentPage = 1;
+  const itemsPerPage = 20;
+  let currentFilter = "";
+
+  async function fetchAndDisplayData(filter = "", page = 1) {
+    try {
+      contentElement.innerHTML = "<p>データを読み込んでいます...</p>";
+      const offset = (page - 1) * itemsPerPage;
+      let url = `https://directus.pstec.jp/items/Repair?limit=${itemsPerPage}&offset=${offset}&meta=total_count`;
+
+      if (filter) {
+        url += `&filter=${encodeURIComponent(filter)}`;
+      }
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      console.log("APIレスポンス:", data);
+      const totalItems = data.meta?.total_count || 0;
+
+      // データが存在しない場合は次へを動かなくする
+      if (totalItems === 0) {
+        contentElement.innerHTML = "該当するデータがありません。";
+        paginationElement.innerHTML = "";
+        return;
+      }
+
+      displayData(data.data);
+      updatePaginationControls(totalItems);
+    } catch (error) {
+      console.error("データ取得エラー:", error);
+      if (error.message.includes("Failed to fetch")) {
+        consoleElement.innerHTML = "ネットワーク接続を確認してください。";
+      } else {
+        contentElement.innerHTML = "データの取得に失敗しました。";
+      }
+    }
+  }
+
+  function highlightText(text, keyword) {
+    if (!keyword) return text;
+    const regex = new RegExp(`(${keyword})`, "gi");
+    return text.replace(regex, '<span class="highlight">$1</span>');
+  }
+
+  function displayData(items) {
+    const keyword = searchInput.value.trim();
+    if (items?.length) {
+      contentElement.innerHTML = `
+        <table>
+          <tr>
+            <th>製品名</th>
+            <th>メーカー名</th>
+            <th>シリアル番号</th>
+          </tr>
+          ${items
+            .map(
+              (item) => `
+            <tr data-id="${item.id}">
+              <td>${highlightText(item.product_name, keyword)}</td>
+              <td>${highlightText(item.manufacturer || "メーカー不明", keyword)}</td>
+              <td>${highlightText(item.serial_number || "なし", keyword)}</td>
+            </tr>
+          `
+            )
+            .join("")}
+        </table>
+      `;
+    } else {
+      contentElement.innerHTML = "該当するデータがありません。";
+    }
+  }
+
+  function updatePaginationControls(totalItems) {
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+
+  // データがなければページネーションも表示しない
+  if (totalItems === 0) {
+    paginationElement.innerHTML = ""; // ページネーションの要素を削除
+    return;
+  }
+
+  paginationElement.innerHTML = `<p>${currentPage}ページ目 / 全${totalPages}ページ</p>`;
+
+  const createPageButton = (page, text = null, isDisabled = false, isActive = false) => {
+    const btn = document.createElement("button");
+    btn.textContent = text || page;
+    btn.classList.add("page-button");
+    if (isActive) btn.classList.add("active");
+    if (isDisabled) btn.disabled = true;
+    btn.addEventListener("click", () => {
+      if (!isDisabled) {
+        currentPage = page;
+        fetchAndDisplayData(currentFilter, currentPage);
+      }
+    });
+    return btn;
+  };
+
+  // ページネーションのボタンを作成
+  paginationElement.appendChild(createPageButton(currentPage - 1, "前へ", currentPage === 1));
+
+  let pageNumbers = [];
+  if (totalPages <= 7) {
+    pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+  } else {
+    pageNumbers = [1, 2, 3];
+
+    if (currentPage > 5) {
+      pageNumbers.push("...");
+    }
+
+    let start = Math.max(4, currentPage - 1);
+    let end = Math.min(totalPages - 3, currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      pageNumbers.push(i);
+    }
+
+    if (currentPage < totalPages - 4) {
+      pageNumbers.push("...");
+    }
+
+    pageNumbers.push(totalPages - 2, totalPages - 1, totalPages);
+  }
+
+  pageNumbers.forEach((page) => {
+    if (page === "...") {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      ellipsis.classList.add("ellipsis");
+      paginationElement.appendChild(ellipsis);
+    } else {
+      paginationElement.appendChild(createPageButton(page, null, false, page === currentPage));
+    }
+  });
+
+  // "次へ" ボタンを更新
+  paginationElement.appendChild(createPageButton(currentPage + 1, "次へ", currentPage >= totalPages));
+}
+
+
+  searchButton.addEventListener("click", () => {
+    const searchQuery = searchInput.value.trim();
+    const productName = document.querySelector(".dropdown").value;
+
+    let filterObj = {};
+
+    if (productName) filterObj.product_name = { _contains: productName };
+
+    if (searchQuery) {
+      filterObj._or = [
+        { product_name: { _contains: searchQuery } },
+        { manufacturer: { _contains: searchQuery } },
+        { serial_number: { _contains: searchQuery } },
+      ];
+    }
+
+    if (productName && searchQuery) {
+      filterObj = { _and: [filterObj] };
+    }
+
+    currentFilter = JSON.stringify(filterObj);
+    currentPage = 1;
+    fetchAndDisplayData(currentFilter, currentPage);
+  });
+
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") searchButton.click();
+  });
+
+  menuHeaders.forEach((header) => {
+    header.addEventListener("click", function () {
+      const productName = this.dataset.product;
+      currentFilter = productName ? JSON.stringify({ product_name: { _contains: productName } }) : "";
+      currentPage = 1;
+      fetchAndDisplayData(currentFilter, currentPage);
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    const row = event.target.closest("tr[data-id]");
+    if (row) {
+      const id = row.getAttribute("data-id");
+      if (id) window.location.href = `./detail.html?id=${id}`;
+    }
+  });
+
+  fetchAndDisplayData();
+});
+
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせフォーム</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/form.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light" id="mainNav">
+        <div class="container zen-kaku-gothic-new-medium">
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <span>PSテクノロジー株式会社</span>
+          </a>
+          <button class="navbar-toggler ms-auto" id="navToggle" type="button" data-bs-toggle="collapse" data-bs-target="#navcol-1" aria-controls="navcol-1" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="toggler-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navcol-1">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="index.html#page-top">ページトップ</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#repair">修理サービス</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#support">製造現場改善支援</a></li>
+              <li class="nav-item"><a class="nav-link" href="homepage.html">修理実績</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">お問合せ</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="contact-container">
+        <h1>お問い合わせフォーム</h1>
+
+        <form action="http://127.0.0.1:5000/send_mail" id="contactForm">
+            <div class="form-group"><label>会社名</label><input type="text" name="company" id="company"></div>
+            <div class="form-group"><label>部署名</label><input type="text" name="department" id="department"></div>
+            <div class="form-group"><label>お名前<span class="required">必須</span></label><input type="text" name="name" id="name" required></div>
+            <div class="form-group"><label>フリガナ<span class="required">必須</span></label><input type="text" name="furigana" id="furigana" required></div>
+            <div class="form-group"><label>メールアドレス<span class="required">必須</span></label><input type="text" name="email" id="email" required></div>
+            <div class="form-group"><label>お電話番号<span class="required">必須</span></label><input type="text" name="phone" id="phone" required></div>
+            <div class="form-group"><label>FAX番号</label><input type="text" name="fax" id="fax"></div>
+            <div class="form-group"><label>郵便番号</label><input type="text" name="postal_code" id="postal_code"></div>
+            <div class="form-group"><label>住所</label><input type="text" name="address" id="address"></div>
+            <div class="form-group"><label>お問い合わせ内容<span class="required">必須</span></label><textarea name="message" id="message" required></textarea></div>
+            <div class="form-group"><label>メーカー名</label><input type="text" name="manufacturer" id="manufacturer"></div>
+            <div class="form-group"><label>機種名</label><input type="text" name="product_name" id="product_name"></div>
+            <div class="form-group"><label>パーツ番号</label><input type="text" name="part_number" id="part_number"></div>
+
+            <button type="button" class="confirm-button">確認画面へ</button>
+        </form>
+
+        <div id="confirmationModal" class="custom-modal">
+            <div class="modal-content">
+                <h2>確認画面</h2>
+                <table class="confirm-table" id="confirmTable"></table>
+                <div class="button-group">
+                    <button id="submitForm" class="btn btn-submit">送信</button>
+                    <button id="editForm" class="btn btn-cancel">戻る</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">送信中...</div>
+        <p id="responseMessage"></p>
+    </div>
+
+    <footer class="footer bg-light mt-5 py-4">
+        <div class="footer-container">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <h3 class="fw-bold">PSテクノロジー株式会社</h3>
+              <p>〒678-0233 兵庫県赤穂市加里屋中洲2丁目30番地</p>
+              <p>TEL : 0791-43-8668</p>
+              <p>FAX : 0791-25-1264</p>
+            </div>
+    
+            <div class="col-md-6 mb-4">
+              <div class="row">
+                <div class="col-6">
+                  <h5 class="fw-bold">コンテンツ</h5>
+                    <ul class="list-unstyled">
+                      <li><a href="index.html">HOME</a></li>
+                      <li><a href="homepage.html">修理実績</a></li>
+                      <li><a href="contact.html">お問い合わせ</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+                <div class="col-lg-6 text-lg-end text-center copyright">
+                    <p class="mb-0">Copyright © 2024 PSテクノロジー株式会社</p>
+                </div>
+            </div>
+        </div>
+      </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+              const navToggle = document.getElementById("navToggle");
+              const navbarNav = document.getElementById("navcol-1");
+
+              navToggle.addEventListener("click", () => {
+                navToggle.classList.toggle("is-active");
+              });
+            });
+
+        // ラベルの日本語対応
+        const fieldLabels = {
+            company: "会社名",
+            department: "部署名",
+            name: "お名前",
+            furigana: "フリガナ",
+            email: "メールアドレス",
+            phone: "お電話番号",
+            fax: "FAX番号",
+            postal_code: "郵便番号",
+            address: "住所",
+            message: "お問い合わせ内容",
+            manufacturer: "メーカー名",
+            product_name: "機種名",
+            part_number: "パーツ番号"
+        };
+
+        // 確認画面の表示
+        document.querySelector(".confirm-button").addEventListener("click", function () {
+          const form = document.getElementById("contactForm");
+          let confirmTable = "<tr><th>項目</th><th>入力内容</th></tr>";
+
+          new FormData(form).forEach((value, key) => {
+              if (value.trim() !== "") {
+                  const label = fieldLabels[key] || key;
+                  confirmTable += `<tr><th>${label}</th><td>${value}</td></tr>`;
+              }
+          });
+
+          document.getElementById("confirmTable").innerHTML = confirmTable;
+
+          const modal = document.getElementById("confirmationModal");
+          modal.style.display = "block"; // display:flex ではなく block に
+        });
+
+
+
+        // モーダルを閉じる
+        document.getElementById("editForm").addEventListener("click", function () {
+            document.getElementById("confirmationModal").style.display = "none";
+        });
+
+       // バリデーションと送信処理
+        document.getElementById("submitForm").addEventListener("click", async function(e) {
+            e.preventDefault();  // 送信を一旦止める
+
+            // 送信中インジケーターを表示
+            document.getElementById("loading").style.display = "block";
+
+            // 必須項目のバリデーション
+            const name = document.getElementById("name").value.trim();
+            const furigana = document.getElementById("furigana").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            // 任意項目
+            const company = document.getElementById("company").value.trim();
+            const department = document.getElementById("department").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const manufacturer = document.getElementById("manufacturer").value.trim();
+            const product_name = document.getElementById("product_name").value.trim();
+            const part_number = document.getElementById("part_number").value.trim();
+
+            // 名前の検証
+            if (!name || name.length > 10) {
+                alert("名前は10文字以内で入力してください。");
+                return;
+            }
+
+            // フリガナの検証
+            if (!/^[ァ-ヶー]+$/.test(furigana) || furigana.length > 30) {
+                alert("フリガナはカタカナのみ30文字以内で入力してください。");
+                return;
+            }
+
+            // メールアドレスの検証（ヘッダーインジェクション対策）
+            const emailPattern = /^[^\r\n@]+@[^\r\n]+\.[a-zA-Z]{2,}$/;
+            if (!email || !emailPattern.test(email)) {
+                alert("正しいメールアドレスを入力してください。");
+                return;
+            }
+
+            // 電話番号の検証
+            const phonePattern = /^[0-9\-]+$/;
+            if (!phone || !phone.match(phonePattern)) {
+                alert("正しい電話番号を入力してください。");
+                return;
+            }
+
+            // 問い合わせ内容の検証
+            if (message.length < 10 || message.length > 500) {
+                alert("問い合わせ内容は10文字以上500文字以内で入力してください。");
+                return;
+            }
+
+            // **任意項目も最低限のバリデーション**
+            const textPattern = /^[ぁ-んァ-ヶ一-龥0-9０-９a-zA-Zー－−,.、。・!?！？\s]*$/;
+
+            if (company.length > 20 || !textPattern.test(company)) {
+                alert("会社名は20文字以内で、特殊文字は使用できません。");
+                return;
+            }
+            if (department.length > 20 || !textPattern.test(department)) {
+                alert("部署名は20文字以内で、特殊文字は使用できません。");
+                return;
+            }
+            if (address.length > 100 || !textPattern.test(address)) {
+                alert("住所は100文字以内で、特殊文字は使用できません。");
+                return;
+            }
+
+            // 送信処理
+            const formData = new FormData(document.getElementById("contactForm"));
+            const responseMessage = document.getElementById("responseMessage");
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/send_mail", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    },
+                    mode: "cors"
+                });
+
+                responseMessage.innerText = response.ok ? "送信が完了しました！" : "送信に失敗しました。";
+                responseMessage.style.color = response.ok ? "green" : "red";
+
+                document.getElementById("confirmationModal").style.display = "none";
+            } catch (error) {
+                responseMessage.innerText = "送信に失敗しました。";
+                responseMessage.style.color = "red";
+            } finally {
+                document.getElementById("loading").style.display = "none";
+            }
+        });
+
+        if (response.ok) {
+          form.reset();  // フォームをクリア
+}
+
+
+
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

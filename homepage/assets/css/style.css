@@ -1,0 +1,140 @@
+.zen-kaku-gothic-new-light {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-regular {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-medium {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-bold {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-black {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.swiper {
+  max-width:1200px;
+  text-align: center;
+}
+
+.swiper img {
+  max-width: 100%;
+  height: auto;
+}
+
+#mainNav .navbar-brand {
+  font-weight: 500;
+}
+
+.nav-item {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+html {
+  scroll-padding-top: 70px;
+}
+
+.heading13 {
+	position: relative;
+	font-size: 26px;
+}
+
+.heading13::before {
+	content: attr(data-number);
+	display: block;
+	color: #d8be39;
+	font-size: 30px;
+}
+
+.images {
+  max-width: 100%;
+  height: auto;
+}
+
+.ribbon {
+  background: #fa897b;
+  box-sizing: border-box;
+  color: #fff;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  height: 50px;
+  letter-spacing: .5px;
+  line-height: 50px;
+  padding: 0 30px;
+  position: relative;
+  text-align: center;
+}
+
+.ribbon::before, .ribbon::after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  z-index: 1;
+}
+
+.ribbon::before {
+  border-color: transparent transparent transparent #fff;
+  border-style: solid;
+  border-width: 25px 0px 25px 15px;
+  left: 0;
+  top: 0;
+}
+
+.ribbon::after {
+  border-color: transparent #fff transparent transparent;
+  border-style: solid;
+  border-width: 25px 15px 25px 0px;
+  right: 0;
+  top: 0;
+}
+
+.list-group{
+  font-size:1.4rem;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  border-width:0px;
+}
+
+.list-group-item {
+/*  color:rgb(169, 175, 185);*/
+*  color:rgb(26, 26, 26);*
+}
+
+.carousel img {
+  height: 500px;
+  display: flex;
+  object-fit: contain;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+  border-radius: 5%;
+}
+
+.carousel p {
+  color:white;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
