@@ -1,92 +1,176 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>じゃんけんゲーム</title>
-        <link rel="stylesheet" href="Janken.css">
-    </head>
-    <body>
-        <h1>じゃんけんゲーム</h1>
-        <!-- プレーヤー名 -->
-         <div id="player-setup">
-            <p>あなたの名前を入力してください:</p>
-            <input type="text" id="playerNameInput" placeholder="例: 太郎">
-            <br>
-            <button onClick="startGame()">ゲーム開始</button>
-         </div>
+<head>
+<meta charset="UTF-8" />
+<title>じゃんけんゲーム</title>
+<link rel="stylesheet" href="/janken/Janken.css">
+</head>
+<body>
+    <h1>じゃんけんゲーム</h1>
+    <!-- プレーヤー名 -->
+    <div id="player-setup">
+        <p>あなたの名前を入力してください:</p>
+        <input type="text" id="playerNameInput" placeholder="例: 太郎" />
+        <br /><br />
+        <button onClick="startGame()">ゲーム開始</button>
+    </div>
 
-        <!-- ゲームエリア -->
-         <div id="game">
-            <h2 id="welcome"></h2>
-            <p>手を選んでください:</p>
-            <img src="https://img.icons8.com/ios/100/rock.png" class="hand-img" onClick="play('グー')" alt="グー">
-            <img src="https://img.icons8.com/ios/100/hand-scissors.png" class="hand-img" onClick="play('チョキ')" alt="チョキ">
-            <img src="https://img.icons8.com/ios/100/hand.png" class="hand-img" onClick="play('パー')" alt="パー">
+    <!-- ゲームエリア -->
+    <div id="game" style="display:none;">
+        <h2 id="welcome"></h2>
+        <p>手を選んでください:</p>
+        <img src="https://img.icons8.com/ios/100/rock.png" class="hand-img disabled" onClick="play('グー')" alt="グー" />
+        <img src="https://img.icons8.com/ios/100/hand-scissors.png" class="hand-img disabled" onClick="play('チョキ')" alt="チョキ" />
+        <img src="https://img.icons8.com/ios/100/hand.png" class="hand-img disabled" onClick="play('パー')" alt="パー" />
 
-            <div id="result"></div>
-            <div id="cpu-hand">
-                <p>CPUの手 :</p>
-                <img id="cpu-hand-img" class="hand-img" src="" alt="CPUの手">
+        <div id="hands-display">
+            <div>
+                <p><strong>あなたの手</strong></p>
+                <img id="player-hand-img" src="" alt="" width="80" />
             </div>
-            <div id="history"></div>
-         </div>
+            <div>
+                <p><strong>CPUの手</strong></p>
+                <img id="cpu-hand-img" src="" alt="" width="80" />
+            </div>
+        </div>
 
-        <script>
-            let playerName = '';
-            let winCount = 0;
-            let loseCount = 0;
-            let drawCount = 0;
+        <div id="result"></div>
+        <div id="score">勝ち: 0 負け: 0 あいこ: 0</div>
 
-            function startGame() {
-                const input = document.getElementById('playerNameInput');
-                playerName = input.value.trim();
+        <button id="reset-btn" onClick="resetGame()">リセット</button>
 
-                if (playerName === '') {
-                    alert('名前を入力してください！');
-                    return;
-                }
-                document.getElementById('welcome').textContent = `${playerName}さん、ようこそ！`;
-                document.getElementById('player-setup').style.display = 'none';
-                document.getElementById('game').style.display = 'block';
+        <h3>ゲーム履歴（最新5件）</h3>
+        <div id="history"></div>
+    </div>
+
+<script>
+    let playerName = '';
+    let winCount = 0;
+    let loseCount = 0;
+    let drawCount = 0;
+    let historyList = [];
+
+    function startGame() {
+        const input = document.getElementById('playerNameInput');
+        playerName = input.value.trim();
+
+        if (playerName === '') {
+            alert('名前を入力してください！');
+            return;
+        }
+        document.getElementById('welcome').textContent = `${playerName}さん、ようこそ！`;
+        document.getElementById('player-setup').style.display = 'none';
+        document.getElementById('game').style.display = 'block';
+
+        // 手画像のdisabledクラスを外す（クリック可能にする）
+        const handImgs = document.querySelectorAll('.hand-img.disabled');
+        handImgs.forEach(img => img.classList.remove('disabled'));
+    }
+
+    function play(player) {
+        if (!playerName) {
+            alert('ゲーム開始前に名前を登録してください！');
+            return;
+        }
+        const hands = ['グー', 'チョキ', 'パー'];
+        const images = {
+            'グー': 'https://img.icons8.com/ios/100/rock.png',
+            'チョキ': 'https://img.icons8.com/ios/100/hand-scissors.png',
+            'パー': 'https://img.icons8.com/ios/100/hand.png'
+        };
+
+        // プレイヤーの手を表示
+        document.getElementById('player-hand-img').src = images[player];
+        document.getElementById('player-hand-img').alt = player;
+
+        // ルーレットアニメーション用
+        let rouletteIndex = 0;
+        const rouletteInterval = setInterval(() => {
+            const hand = hands[rouletteIndex % hands.length];
+            document.getElementById('cpu-hand-img').src = images[hand];
+            document.getElementById('cpu-hand-img').alt = hand;
+            rouletteIndex++;
+        }, 100);
+
+        // 1秒後にCPUの手を決定して結果表示
+        setTimeout(() => {
+            clearInterval(rouletteInterval);
+
+            const cpu = hands[Math.floor(Math.random() * hands.length)];
+
+            let resultText = '';
+
+            if (player === cpu) {
+                resultText = 'あいこです！';
+                drawCount++;
+            } else if (
+                (player === 'グー' && cpu === 'チョキ') ||
+                (player === 'チョキ' && cpu === 'パー') ||
+                (player === 'パー' && cpu === 'グー')
+            ) {
+                resultText = 'あなたの勝ち！';
+                winCount++;
+            } else {
+                resultText = 'あなたの負け...';
+                loseCount++;
             }
 
-            function play(player) {
-                const hands = ['グー', 'チョキ', 'パー'];
-                const images = {
-                    'グー': 'https://img.icons8.com/ios/100/rock.png',
-                    'チョキ': 'https://img.icons8.com/ios/100/hand-scissors.png',
-                    'パー': 'https://img.icons8.com/ios/100/hand.png'
-                };
-
-                const cpu = hands[Math.floor(Math.random() * hands.length)];
-
-                let resultText = '';
-
-                if (player === cpu) {
-                    resultText = 'あいこです！';
-                    drawCount++;
-                } else if (
-                    (player === 'グー' && cpu === 'チョキ') ||
-                    (player === 'チョキ' && cpu === 'パー') ||
-                    (player === 'パー' && cpu === 'グー')
-                ) {
-                    resultText = 'あなたの勝ち！';
-                    winCount++;
-                } else {
-                    resultText = 'あなたの負け...';
-                    loseCount++;
-                }
-
-                document.getElementById('result').innerHTML =
+            document.getElementById('result').innerHTML =
                 `あなた : ${player} / コンピュータ : ${cpu}<br><strong>${resultText}</strong>`;
 
-                document.getElementById('history').innerHTML =
+            // スコア表示
+            document.getElementById('score').textContent =
                 `勝ち: ${winCount} 負け: ${loseCount} あいこ: ${drawCount}`;
 
-                document.getElementById('cpu-hand-img').src = images[cpu];
-                document.getElementById('cpu-hand-img').alt = cpu;
+            // 履歴更新（最新5件のみ）
+            historyList.unshift(`${playerName}：あなた(${player}) vs CPU(${cpu}) → ${resultText}`);
+            if (historyList.length > 5) {
+                historyList.pop();
             }
-        </script>
+            updateHistory();
 
-    </body>
+            document.getElementById('cpu-hand-img').src = images[cpu];
+            document.getElementById('cpu-hand-img').alt = cpu;
+        }, 1000);
+    }
+
+    function updateHistory() {
+        const historyDiv = document.getElementById('history');
+        historyDiv.innerHTML = historyList.map(item => `<div>${item}</div>`).join('');
+    }
+
+    function resetGame() {
+        if (confirm('ゲームをリセットしますか？スコアと履歴が消えます。')) {
+            winCount = 0;
+            loseCount = 0;
+            drawCount = 0;
+            historyList = [];
+            playerName = '';
+
+            document.getElementById('result').textContent = '';
+            document.getElementById('score').textContent = `勝ち: 0 負け: 0 あいこ: 0`;
+            document.getElementById('history').innerHTML = '';
+            document.getElementById('cpu-hand-img').src = '';
+            document.getElementById('player-hand-img').src = '';
+            document.getElementById('player-hand-img').alt = '';
+            document.getElementById('cpu-hand-img').alt = '';
+
+            // ゲームエリア非表示、名前登録エリア表示
+            document.getElementById('game').style.display = 'none';
+            document.getElementById('player-setup').style.display = 'block';
+
+            // 手画像を再度disabledにする
+            const handImgs = document.querySelectorAll('.hand-img');
+            handImgs.forEach(img => {
+                if (!img.classList.contains('disabled')) {
+                    img.classList.add('disabled');
+                }
+            });
+
+            // 入力欄もクリア
+            document.getElementById('playerNameInput').value = '';
+        }
+    }
+</script>
+</body>
 </html>

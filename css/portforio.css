@@ -1,9 +1,9 @@
 body {
-      font-family: sans-serif;
-      margin: 40px;
-      background-color: #f9f9f9;
-      color: #333;
-    }
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    margin: 40px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
 
     header {
       text-align: center;
@@ -23,11 +23,14 @@ body {
       margin-bottom: 40px;
     }
 
-    h2 {
-      border-bottom: 2px solid #333;
-      padding-bottom: 5px;
-      font-size: 24px;
-    }
+  h2 {
+    font-size: 2rem;
+    border-left: 6px solid var(--accent);
+    padding-left: 10px;
+    margin-top: 2rem;
+    color: var(--text-main);
+  }
+
 
     ul {
       list-style: none;
@@ -55,3 +58,63 @@ body {
       font-size: 16px;
       line-height: 1.6;
     }
+
+  :root {
+  --main-bg: #f8f9fa;
+  --accent: #0d6efd; /* Bootstrapのprimary */
+  --text-main: #333;
+  --text-light: #6c757d;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text-main);
+    background-color: var(--main-bg);
+    line-height: 1.8;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  .container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+  }
+
+  .card:hover {
+      transform: translateY(-5px);
+  }
+
+  .card-title {
+      font-weight: bold;
+      color: #0d6efd;
+  }
+
+  .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+      border-radius: 6px;
+  }
+
+  .btn-primary:hover {
+      background-color: #0b5ed7;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
