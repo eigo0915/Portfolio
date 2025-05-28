@@ -1,120 +1,97 @@
-body {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    margin: 40px;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 18px;
-    }
-
-    section {
-      margin-bottom: 40px;
-    }
-
-  h2 {
-    font-size: 2rem;
-    border-left: 6px solid var(--accent);
-    padding-left: 10px;
-    margin-top: 2rem;
-    color: var(--text-main);
-  }
-
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      background: #fff;
-      margin: 15px 0;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    a {
-      text-decoration: none;
-      color: #007acc;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .skills {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-  :root {
-  --main-bg: #f8f9fa;
-  --accent: #0d6efd; /* Bootstrapのprimary */
-  --text-main: #333;
-  --text-light: #6c757d;
-  }
-
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    color: var(--text-main);
-    background-color: var(--main-bg);
-    line-height: 1.8;
-  }
-
-  section {
-    margin-bottom: 3rem;
-  }
-
-  .container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  .card {
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease;
-  }
-
-  .card:hover {
-      transform: translateY(-5px);
-  }
-
-  .card-title {
-      font-weight: bold;
-      color: #0d6efd;
-  }
-
-  .btn-primary {
-      background-color: #0d6efd;
-      border: none;
-      border-radius: 6px;
-  }
-
-  .btn-primary:hover {
-      background-color: #0b5ed7;
-  }
-
-  .card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+/* 基本リセット */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
 }
 
-.card-text {
-    font-size: 0.95rem;
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
     line-height: 1.6;
 }
 
+h1, h2 {
+    font-weight: 700;
+}
+
+h1 {
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    margin-bottom: 1em;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.3em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* カード共通 */
+.card {
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 1rem 1.5rem;
+}
+
+.card-title {
+    margin-bottom: 0.75em;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 1em;
+}
+
+.badge {
+    font-size: 0.85rem;
+}
+
+/* ヘッダー */
+header {
+    background-color: #e9ecef;
+}
+
+/* ナビゲーションの余白 */
+.navbar-brand {
+    font-weight: 700;
+}
+
+/* セクション間余白 */
+section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* フッター */
+footer {
+    font-size: 0.9rem;
+}
+
+/* スマホでの見やすさ調整 */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .card-title {
+        font-size: 1.1rem;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
+}
